@@ -1,0 +1,103 @@
+Central Processing Unit|Computer Personal Unit|Central Process Unit|Central Processor Unit
+JavaScript|Python|HTML|Java
+Hyper Text Markup Language|High Tech Modern Language|Hyper Transfer Markup Language|Home Tool Markup Language
+Queue|Stack|Array|Linked List
+O(n)|O(log n)|O(n^2)|O(1)
+Kotlin|Swift|Java|C#
+Structured Query Language|Simple Query Language|Standard Query Language|System Query Language
+Execute code|Translate code|Debug code|Optimize code
+//|/*|#|--
+Object-Oriented Programming|Object-Oriented Protocol|Object-Oriented Process|Object-Oriented Pattern
+public|private|protected|default
+Array|Linked List|Hash Table|Queue
+Application Programming Interface|Application Program Interface|Advanced Programming Interface|Automated Programming Interface
+extends|inherits|implements|super
+2 bytes|4 bytes|8 bytes|Depends on compiler
+Uniform Resource Locator|Universal Resource Locator|Uniform Reference Locator|Universal Reference Locator
+new|malloc|alloc|create
+Multiple forms|Data hiding|Code reuse|Memory management
+Cascading Style Sheets|Computer Style Sheets|Creative Style Sheets|Colorful Style Sheets
+HTTPS|FTP|TCP|UDP
+Special method|Variable type|Data structure|Loop type
+Integrated Development Environment|Integrated Debugging Environment|Interactive Development Environment|Intelligent Development Environment
+for loop|while loop|do-while loop|if-else
+== checks value, === checks value and type|== checks type, === checks value|No difference|== is assignment, === is comparison
+JavaScript Object Notation|Java Standard Object Notation|JavaScript Oriented Notation|Java System Object Notation
+Merge Sort|Quick Sort|Bubble Sort|Insertion Sort
+Function calling itself|Loop structure|Conditional statement|Variable declaration
+Domain Name System|Domain Network System|Data Name System|Digital Name System
+Python|Java|C++|HTML
+Memory address|Variable type|Function|Class
+HyperText Transfer Protocol|High Transfer Protocol|Hyper Transfer Protocol|Host Transfer Protocol
+Stack|Queue|Array|Tree
+Data hiding|Multiple forms|Code reuse|Function overloading
+Virtual Machine|Virtual Memory|Visual Machine|Variable Memory
+Python|Java|C++|Ruby
+Memory management|Code execution|Error handling|Input/output
+Random Access Memory|Read Access Memory|Rapid Access Memory|Random Allocation Memory
+const|final|static|constant
+Class that can't be instantiated|Class with only static methods|Class with no variables|Class with only private methods
+Secure Sockets Layer|Secure System Layer|Security Socket Layer|System Security Layer
+delete|free|remove|destroy
+Code reuse|Data hiding|Multiple forms|Encapsulation
+eXtensible Markup Language|Extended Markup Language|Extra Markup Language|Example Markup Language
+Swift|Kotlin|Java|Objective-C
+Stack: LIFO, Heap: dynamic|Stack: FIFO, Heap: LIFO|No difference|Stack: dynamic, Heap: static
+Command Line Interface|Computer Line Interface|Code Line Interface|Control Line Interface
+Stack|Queue|Tree|Graph
+Same name, different parameters|Same name, same parameters|Different name, same parameters|Same name, different return type
+File Transfer Protocol|File Transmission Protocol|Fast Transfer Protocol|File Transport Protocol
+C++|Java|Python|JavaScript
+Function that can be overridden|Static function|Inline function|Private function
+Graphical User Interface|General User Interface|Graphic User Interface|Global User Interface
+Dijkstra's|Bubble Sort|Binary Search|Quick Sort
+Error handling|Memory management|Code optimization|Input/output
+Portable Network Graphics|Portable Network Graphics|Professional Network Graphics|Pixel Network Graphics
+Python|Java|C++|HTML
+ArrayList: dynamic array, LinkedList: linked nodes|ArrayList: linked nodes, LinkedList: dynamic array|No difference|ArrayList: faster access, LinkedList: slower access
+Scalable Vector Graphics|Simple Vector Graphics|Standard Vector Graphics|System Vector Graphics
+Singleton|Observer|Factory|Adapter
+Parallel execution|Sequential execution|Single execution|Random execution
+Joint Photographic Experts Group|Joint Picture Experts Group|Java Picture Experts Group|Joint Photo Experts Group
+Java|Python|C++|JavaScript
+Interface has no implementation, abstract class can have|No difference|Abstract class has no implementation, interface can have|Interface can be instantiated
+Transmission Control Protocol|Transfer Control Protocol|Transmission Communication Protocol|Transfer Communication Protocol
+Queue|Stack|Tree|Graph
+Same signature in subclass|Different signature in subclass|Same name in same class|Different name in same class
+User Datagram Protocol|User Data Protocol|Universal Datagram Protocol|Universal Data Protocol
+C|Java|Python|JavaScript
+Automatic memory management|Manual memory management|Stack memory management|Heap memory management
+Internet Protocol|Internet Program|International Protocol|Internal Protocol
+Quick Sort|Merge Sort|Bubble Sort|Insertion Sort
+Dependency management|Memory management|Error handling|Code execution
+Portable Document Format|Portable Data Format|Professional Document Format|Personal Document Format
+Python|Java|C++|HTML
+Deep copy: copies references, shallow copy: copies values|Deep copy: copies values, shallow copy: copies references|No difference|Deep copy: faster, shallow copy: slower
+Comma Separated Values|Column Separated Values|Computer Separated Values|Code Separated Values
+Hash Table|Array|Linked List|Tree
+Anonymous function|Named function|Static function|Virtual function
+PHP: Hypertext Preprocessor|Personal Home Page|Program Home Page|Public Home Page
+Solidity|Python|Java|C++
+Process: independent, Thread: shares memory|Process: shares memory, Thread: independent|No difference|Process: lighter, Thread: heavier
+Graphics Interchange Format|Graphic Interchange Format|General Interchange Format|Global Interchange Format
+B-tree|Quick Sort|Binary Search|Merge Sort
+Object conversion|Memory allocation|Code compilation|Error handling
+Artificial Intelligence|Automated Intelligence|Advanced Intelligence|Artificial Information
+C#|Java|Python|C++
+Compiler: translates all at once, Interpreter: line by line|No difference|Compiler: line by line, Interpreter: all at once|Compiler: slower, Interpreter: faster
+MPEG-1 Audio Layer 3|Music Player 3|Media Player 3|Movie Player 3
+Hash Table|Array|Linked List|Stack
+Runtime type information|Compile-time checking|Memory allocation|Code optimization
+Operating System|Operating System|Office System|Online System
+C++|Python|Java|Arduino C
+Static: types checked at runtime, Dynamic: at compile time|Static: types checked at compile time, Dynamic: at runtime|No difference|Static: flexible, Dynamic: rigid
+Compressed file|Large file|System file|Program file
+KMP algorithm|Binary Search|Quick Sort|Merge Sort
+Parallel execution|Sequential execution|Single execution|Random execution
+Virtual Reality|Virtual Reality|Visual Reality|Video Reality
+JavaScript|Python|Java|PHP
+Array: fixed size, Linked List: dynamic|Array: dynamic, Linked List: fixed size|No difference|Array: slower access, Linked List: faster access
+Executable file|Example file|Export file|External file
+Heap|Stack|Queue|Tree
+Programming with functions|Programming with objects|Programming with classes|Programming with variables
+Augmented Reality|Augmented Reality|Advanced Reality|Artificial Reality

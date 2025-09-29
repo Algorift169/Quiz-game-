@@ -1,0 +1,103 @@
+Central Processing Unit
+JavaScript
+Hyper Text Markup Language
+Stack
+O(log n)
+Java
+Structured Query Language
+Translate code
+//
+Object-Oriented Programming
+public
+Hash Table
+Application Programming Interface
+extends
+Depends on compiler
+Uniform Resource Locator
+new
+Multiple forms
+Cascading Style Sheets
+HTTPS
+Special method
+Integrated Development Environment
+do-while loop
+== checks value, === checks value and type
+JavaScript Object Notation
+Merge Sort
+Function calling itself
+Domain Name System
+Python
+Memory address
+HyperText Transfer Protocol
+Queue
+Data hiding
+Virtual Machine
+Python
+Memory management
+Random Access Memory
+const
+Class that can't be instantiated
+Secure Sockets Layer
+delete
+Code reuse
+eXtensible Markup Language
+Swift
+Stack: LIFO, Heap: dynamic
+Command Line Interface
+Stack
+Same name, different parameters
+File Transfer Protocol
+C++
+Function that can be overridden
+Graphical User Interface
+Dijkstra's
+Error handling
+Portable Network Graphics
+Python
+ArrayList: dynamic array, LinkedList: linked nodes
+Scalable Vector Graphics
+Factory
+Parallel execution
+Joint Photographic Experts Group
+Java
+Interface has no implementation, abstract class can have
+Transmission Control Protocol
+Queue
+Same signature in subclass
+User Datagram Protocol
+C
+Automatic memory management
+Internet Protocol
+Quick Sort
+Dependency management
+Portable Document Format
+Python
+Deep copy: copies values, shallow copy: copies references
+Comma Separated Values
+Hash Table
+Anonymous function
+PHP: Hypertext Preprocessor
+Solidity
+Process: independent, Thread: shares memory
+Graphics Interchange Format
+B-tree
+Object conversion
+Artificial Intelligence
+C#
+Compiler: translates all at once, Interpreter: line by line
+MPEG-1 Audio Layer 3
+Hash Table
+Runtime type information
+Operating System
+Arduino C
+Static: types checked at compile time, Dynamic: at runtime
+Compressed file
+KMP algorithm
+Parallel execution
+Virtual Reality
+JavaScript
+Array: fixed size, Linked List: dynamic
+Executable file
+Heap
+Programming with functions
+Augmented Reality

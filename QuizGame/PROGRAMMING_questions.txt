@@ -1,0 +1,103 @@
+What does CPU stand for?
+Which programming language is known as the backbone of the web?
+What does HTML stand for?
+Which data structure uses LIFO principle?
+What is the time complexity of binary search?
+Which language is used for Android development?
+What does SQL stand for?
+What is the main purpose of a compiler?
+Which symbol is used for single-line comments in C++?
+What does OOP stand for?
+What is the default access modifier in a C++ class?
+Which data structure is best for implementing a LRU cache?
+What does API stand for?
+Which keyword is used to inherit a class in C++?
+What is the size of an integer in C++?
+What does URL stand for?
+Which method is used to allocate memory in C++?
+What is polymorphism in OOP?
+What does CSS stand for?
+Which protocol is used for secure web browsing?
+What is a constructor in programming?
+What does IDE stand for?
+Which loop is guaranteed to execute at least once?
+What is the difference between == and === in JavaScript?
+What does JSON stand for?
+Which sorting algorithm has worst-case O(n log n) time?
+What is recursion in programming?
+What does DNS stand for?
+Which language is primarily used for data science?
+What is a pointer in C++?
+What does HTTP stand for?
+Which data structure uses FIFO principle?
+What is encapsulation in OOP?
+What does VM stand for?
+Which language was created by Guido van Rossum?
+What is the purpose of garbage collection?
+What does RAM stand for?
+Which keyword makes a variable constant in C++?
+What is an abstract class?
+What does SSL stand for?
+Which method is used to free memory in C++?
+What is inheritance in OOP?
+What does XML stand for?
+Which language is used for iOS development?
+What is the difference between stack and heap?
+What does CLI stand for?
+Which data structure is used for DFS?
+What is method overloading?
+What does FTP stand for?
+Which language was designed by Bjarne Stroustrup?
+What is a virtual function?
+What does GUI stand for?
+Which algorithm is used for shortest path finding?
+What is exception handling?
+What does PNG stand for?
+Which language is known for machine learning?
+What is the difference between ArrayList and LinkedList?
+What does SVG stand for?
+Which design pattern is used for object creation?
+What is multithreading?
+What does JPEG stand for?
+Which language uses JVM?
+What is the difference between interface and abstract class?
+What does TCP stand for?
+Which data structure is used for BFS?
+What is method overriding?
+What does UDP stand for?
+Which language is used for system programming?
+What is a smart pointer?
+What does IP stand for?
+Which algorithm is used for sorting in C++ sort()?
+What is dependency injection?
+What does PDF stand for?
+Which language is used for web scraping?
+What is the difference between deep copy and shallow copy?
+What does CSV stand for?
+Which data structure has O(1) average insertion?
+What is lambda expression?
+What does PHP stand for?
+Which language is used for blockchain development?
+What is the difference between process and thread?
+What does GIF stand for?
+Which algorithm is used for database indexing?
+What is serialization?
+What does AI stand for?
+Which language is used for game development in Unity?
+What is the difference between compiler and interpreter?
+What does MP3 stand for?
+Which data structure is used for dictionary?
+What is reflection in programming?
+What does OS stand for?
+Which language is used for Arduino programming?
+What is the difference between static and dynamic typing?
+What does ZIP stand for?
+Which algorithm is used for pattern matching?
+What is concurrency?
+What does VR stand for?
+Which language is used for backend web development?
+What is the difference between array and linked list?
+What does EXE stand for?
+Which data structure is used for priority queue?
+What is functional programming?
+What does AR stand for?

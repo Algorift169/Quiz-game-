@@ -1,0 +1,105 @@
+Venus|Mars|Jupiter|Saturn
+5|6|7|8
+Elephant|Blue Whale|Giraffe|Polar Bear
+Gold|Oxygen|Osmium|Oganesson
+Seoul|Beijing|Tokyo|Bangkok
+William Shakespeare|Charles Dickens|Jane Austen|Mark Twain
+Gold|Diamond|Iron|Platinum
+Pacific|Atlantic|Indian|Arctic
+Nile|Amazon|Yangtze|Mississippi
+China|India|USA|Indonesia
+Vatican City|Monaco|San Marino|Liechtenstein
+Lion|Tiger|Elephant|Gorilla
+Pound|Euro|Dollar|Yen
+Mercury|Venus|Earth|Mars
+Sahara|Arabian|Gobi|Kalahari
+Portuguese|Spanish|French|English
+Vincent van Gogh|Pablo Picasso|Claude Monet|Salvador Dali
+Rice|Fish|Seaweed|Vegetables
+Badminton|Tennis|Squash|Table Tennis
+Mount Everest|K2|Kangchenjunga|Lhotse
+Japan|China|India|Thailand
+Canberra|Sydney|Melbourne|Perth
+Oxygen|Silicon|Aluminum|Iron
+Skin|Liver|Heart|Brain
+Jupiter|Saturn|Uranus|Neptune
+Yuan|Yen|Won|Ringgit
+Chameleon|Octopus|Squid|Cuttlefish
+Ostrich|Eagle|Albatross|Condor
+France|Russia|USA|China
+Arabic|French|English|Spanish
+Isaac Newton|Albert Einstein|Galileo Galilei|Stephen Hawking
+Cheetah|Lion|Leopard|Horse
+Mercury|Gallium|Bromine|Francium
+Ottawa|Toronto|Vancouver|Montreal
+Saturn|Jupiter|Uranus|Neptune
+Caspian Sea|Superior|Victoria|Huron
+Italy|Greece|Spain|France
+Stapes|Femur|Tibia|Radius
+East|West|North|South
+Ruble|Rouble|Rubla|Rubles
+Horse|Elephant|Giraffe|Zebra
+Mariana Trench|Puerto Rico Trench|Java Trench|Tonga Trench
+Nitrogen|Oxygen|Carbon Dioxide|Argon
+Rome|Milan|Venice|Florence
+Venus|Mercury|Mars|Jupiter
+Greenland|New Guinea|Borneo|Madagascar
+Sweden|Norway|Finland|Canada
+Spanish|Portuguese|Italian|German
+J.K. Rowling|Stephen King|George R.R. Martin|J.R.R. Tolkien
+Peregrine Falcon|Eagle|Hawk|Osprey
+Oxygen|Carbon Dioxide|Nitrogen|Helium
+Berlin|Munich|Hamburg|Frankfurt
+Jupiter|Saturn|Neptune|Uranus
+Great Barrier Reef|Mesoamerican Reef|New Caledonia Barrier Reef|Florida Reef
+Russia|Canada|China|USA
+Yen|Yuan|Won|Dollar
+Tortoise|Elephant|Whale|Parrot
+Angel Falls|Niagara Falls|Victoria Falls|Iguazu Falls
+Tungsten|Argon|Neon|Krypton
+Paris|Lyon|Marseille|Nice
+Venus|Mercury|Mars|Jupiter
+Mauna Loa|Mount Etna|Mount Vesuvius|Krakatoa
+Indonesia|Japan|USA|Philippines
+Persian|Arabic|Turkish|Kurdish
+Ludwig van Beethoven|Wolfgang Amadeus Mozart|Johann Sebastian Bach|Franz Schubert
+Sloth|Tortoise|Snail|Koala
+Helium|Hydrogen|Oxygen|Nitrogen
+Madrid|Barcelona|Seville|Valencia
+Neptune|Saturn|Jupiter|Mars
+Amazon Rainforest|Congo Rainforest|Southeast Asian Rainforest|Taiga
+Canada|Indonesia|Norway|Greece
+Rupee|Rupiah|Ringgit|Baht
+Bat|Dog|Cat|Elephant
+Dead Sea|Red Sea|Mediterranean Sea|Black Sea
+Hydrogen|Helium|Lithium|Oxygen
+Cairo|Alexandria|Giza|Luxor
+Jupiter|Saturn|Neptune|Uranus
+Hudson Bay|Bay of Bengal|Chesapeake Bay|San Francisco Bay
+Canada|Finland|Russia|USA
+Turkish|Arabic|Kurdish|Persian
+Leonardo da Vinci|Michelangelo|Raphael|Donatello
+Bat|Flying Squirrel|Flying Fish|Colugo
+Carbon Dioxide|Oxygen|Nitrogen|Helium
+Brasilia|Rio de Janeiro|Sao Paulo|Salvador
+Venus|Mars|Mercury|Jupiter
+Ganges Delta|Mekong Delta|Nile Delta|Mississippi Delta
+Sudan|Egypt|Mexico|Peru
+Franc|Euro|Lira|Peso
+Saltwater Crocodile|Great White Shark|Hippopotamus|Lion
+Antarctica|Siberia|Greenland|Alaska
+Iron|Calcium|Sodium|Potassium
+Pretoria|Cape Town|Johannesburg|Durban
+Uranus|Mars|Jupiter|Saturn
+Arabian Peninsula|Indian Peninsula|Scandinavian Peninsula|Iberian Peninsula
+South Africa|India|Switzerland|Bolivia
+Vietnamese|Chinese|Thai|Cambodian
+Leo Tolstoy|Fyodor Dostoevsky|Anton Chekhov|Alexander Pushkin
+Hummingbird|Eagle|Parrot|Owl
+Ozone|Oxygen|Nitrogen|Carbon Dioxide
+Mexico City|Guadalajara|Monterrey|Puebla
+Venus|Mercury|Mars|Jupiter
+Mammoth Cave|Son Doong Cave|Krubera Cave|Optymistychna Cave
+China|Russia|Brazil|Germany
+Riyal|Dinar|Dirham|Rupiah
+Giant Squid|Whale|Elephant|Ostrich
