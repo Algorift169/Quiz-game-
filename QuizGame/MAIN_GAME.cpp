@@ -8,7 +8,6 @@
 #include <algorithm>
 using namespace std;
 
-// Structure to store question data
 struct Question {
     string question;
     vector<string> options;
@@ -16,10 +15,9 @@ struct Question {
     string category;
 };
 
-// Structure to store user progress
 struct UserProgress {
     string username;
-    map<string, int> categoryProgress; // category -> current question index
+    map<string, int> categoryProgress;
     int totalScore;
     int highestScore;
 };
@@ -28,9 +26,8 @@ class QuizGame {
 private:
     vector<Question> questions;
     UserProgress currentUser;
-    string progressFile = "user_progress.txt";
+    string progressFile;
 
-    // File names for each category
     map<string, string> questionFiles = {
         {"Programming", "PROGRAMMING_questions.txt"},
         {"History", "HISTORY_questions.txt"},
@@ -50,7 +47,6 @@ private:
         {"General", "GENERAL_KNOWLEDGE_ANSWERS.txt"}
     };
 
-    // Helper function to trim whitespace
     string trim(const string& str) {
         size_t start = str.find_first_not_of(" \t\n\r");
         size_t end = str.find_last_not_of(" \t\n\r");
@@ -58,14 +54,23 @@ private:
         return str.substr(start, end - start + 1);
     }
 
-    // Helper function to find correct answer letter
     char findCorrectAnswerLetter(const vector<string>& options, const string& correctAnswer) {
         for (size_t i = 0; i < options.size(); i++) {
             if (trim(options[i]) == trim(correctAnswer)) {
                 return 'A' + i;
             }
         }
-        return 'A'; // Default to first option if not found
+        return 'A';
+    }
+
+    bool checkForExit() {
+        if (cin.peek() == 'q' || cin.peek() == 'Q') {
+            cin.ignore();
+            cout << "\nSaving progress and exiting to menu...\n";
+            saveUserProgress();
+            return true;
+        }
+        return false;
     }
 
 public:
@@ -109,14 +114,12 @@ public:
                 q.category = category;
                 q.question = trim(qLine);
 
-                // Parse options - using | as delimiter
                 stringstream ss(oLine);
                 string opt;
                 while (getline(ss, opt, '|')) {
                     q.options.push_back(trim(opt));
                 }
 
-                // Find the correct answer letter
                 string correctAnswerText = trim(aLine);
                 q.correctAnswer = findCorrectAnswerLetter(q.options, correctAnswerText);
 
@@ -132,6 +135,10 @@ public:
         }
 
         cout << "Total questions loaded: " << questions.size() << "\n";
+    }
+
+    void setProgressFile(const string& username) {
+        progressFile = username + "_progress.txt";
     }
 
     void loadUserProgress() {
@@ -171,7 +178,7 @@ public:
         cout << "4. View Category Progress\n";
         cout << "5. Exit\n";
         cout << "====================================\n";
-        cout << "Enter your choice (1-5): ";
+        cout << "Enter your choice (1-5) or 'q' to exit: ";
     }
 
     void displayCategories() {
@@ -182,7 +189,7 @@ public:
         cout << "4. General Knowledge\n";
         cout << "5. Back to Main Menu\n";
         cout << "=============================\n";
-        cout << "Enter your choice (1-5): ";
+        cout << "Enter your choice (1-5) or 'q' to exit: ";
     }
 
     string getCategoryName(int choice) {
@@ -198,6 +205,7 @@ public:
     void startNewGame() {
         cout << "\nEnter your username: ";
         cin >> currentUser.username;
+        setProgressFile(currentUser.username);
         currentUser.totalScore = 0;
         currentUser.highestScore = 0;
         currentUser.categoryProgress.clear();
@@ -205,10 +213,16 @@ public:
             currentUser.categoryProgress[pair.first] = 0;
         }
         cout << "\nWelcome, " << currentUser.username << "!\n";
+        cout << "Press 'q' at any time to exit to main menu.\n";
         playGame();
     }
 
     void continueGame() {
+        string username;
+        cout << "\nEnter your username: ";
+        cin >> username;
+        currentUser.username = username;
+        setProgressFile(currentUser.username);
         loadUserProgress();
         if(currentUser.username.empty()) {
             cout << "\nNo saved game found. Starting new game...\n";
@@ -216,6 +230,7 @@ public:
         } else {
             cout << "\nWelcome back, " << currentUser.username << "!\n";
             cout << "Your current score: " << currentUser.totalScore << "\n";
+            cout << "Press 'q' at any time to exit to main menu.\n";
             playGame();
         }
     }
@@ -225,6 +240,8 @@ public:
         do {
             displayCategories();
             cin >> choice;
+            if (checkForExit()) return;
+            
             if(choice >= 1 && choice <= 4) {
                 string category = getCategoryName(choice);
                 playCategory(category);
@@ -265,9 +282,15 @@ public:
             displayQuestion(q, i + 1);
 
             char answer;
-            cout << "Your answer (A/B/C/D): ";
+            cout << "Your answer (A/B/C/D) or 'q' to exit: ";
             cin >> answer;
             answer = toupper(answer);
+
+            if (answer == 'Q') {
+                cout << "\nSaving progress and exiting...\n";
+                saveUserProgress();
+                return;
+            }
 
             if(answer == q.correctAnswer) {
                 cout << "✅ Correct! +10 points\n";
@@ -296,6 +319,11 @@ public:
     }
 
     void viewHighestScore() {
+        string username;
+        cout << "\nEnter your username: ";
+        cin >> username;
+        currentUser.username = username;
+        setProgressFile(currentUser.username);
         loadUserProgress();
         if(currentUser.username.empty()) {
             cout << "\nNo game data found. Play a game first!\n";
@@ -308,6 +336,11 @@ public:
     }
 
     void viewCategoryProgress() {
+        string username;
+        cout << "\nEnter your username: ";
+        cin >> username;
+        currentUser.username = username;
+        setProgressFile(currentUser.username);
         loadUserProgress();
         if(currentUser.username.empty()) {
             cout << "\nNo game data found. Play a game first!\n";
@@ -338,6 +371,8 @@ public:
         do {
             displayMenu();
             cin >> choice;
+            if (checkForExit()) break;
+            
             switch(choice) {
                 case 1:
                     startNewGame();
