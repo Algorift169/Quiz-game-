@@ -25,8 +25,10 @@ struct UserProgress {
 class QuizGame {
 private:
     vector<Question> questions;
+    map<string, UserProgress> users;
     UserProgress currentUser;
-    string progressFile;
+    string lastUser;
+    string progressFile = "user_progress.txt";
 
     map<string, string> questionFiles = {
         {"Programming", "PROGRAMMING_questions.txt"},
@@ -63,110 +65,133 @@ private:
         return 'A';
     }
 
-    bool checkForExit() {
-        if (cin.peek() == 'q' || cin.peek() == 'Q') {
-            cin.ignore();
-            cout << "\nSaving progress and exiting to menu...\n";
-            saveUserProgress();
-            return true;
+    void loadAllUsers() {
+        users.clear();
+        lastUser = "";
+        ifstream file(progressFile);
+        if (!file.is_open()) return;
+        string line;
+        UserProgress temp;
+        bool inUser = false;
+        while (getline(file, line)) {
+            string s = trim(line);
+            if (s.size() >= 5 && s.substr(0,5) == "LAST ") {
+                lastUser = trim(s.substr(5));
+                continue;
+            }
+            if (s.size() >= 5 && s.substr(0,5) == "USER ") {
+                inUser = true;
+                temp = UserProgress();
+                temp.username = trim(s.substr(5));
+                temp.totalScore = 0;
+                temp.highestScore = 0;
+                temp.categoryProgress.clear();
+                continue;
+            }
+            if (s == "ENDUSER") {
+                inUser = false;
+                users[temp.username] = temp;
+                continue;
+            }
+            if (inUser) {
+                if (s.size() >= 6 && s.substr(0,6) == "TOTAL ") {
+                    temp.totalScore = stoi(trim(s.substr(6)));
+                } else if (s.size() >= 5 && s.substr(0,5) == "HIGH ") {
+                    temp.highestScore = stoi(trim(s.substr(5)));
+                } else if (s.size() >= 5 && s.substr(0,5) == "PROG ") {
+                    string rest = trim(s.substr(5));
+                    stringstream ss(rest);
+                    string cat;
+                    int prog;
+                    ss >> cat >> prog;
+                    temp.categoryProgress[cat] = prog;
+                }
+            }
         }
-        return false;
+        file.close();
+        if (!lastUser.empty() && users.find(lastUser) != users.end()) {
+            currentUser = users[lastUser];
+        } else {
+            currentUser = UserProgress();
+            currentUser.username = "";
+        }
+    }
+
+    void saveAllUsers() {
+        ofstream file(progressFile);
+        if (!file.is_open()) return;
+        if (!currentUser.username.empty()) file << "LAST " << currentUser.username << "\n";
+        for (auto& pair : users) {
+            UserProgress u = pair.second;
+            file << "USER " << u.username << "\n";
+            file << "TOTAL " << u.totalScore << "\n";
+            file << "HIGH " << u.highestScore << "\n";
+            for (auto& p : u.categoryProgress) {
+                file << "PROG " << p.first << " " << p.second << "\n";
+            }
+            file << "ENDUSER\n";
+        }
+        file.close();
+    }
+
+    void setCurrentUser(const string& username, bool resetProgress) {
+        if (users.find(username) == users.end()) {
+            UserProgress u;
+            u.username = username;
+            u.totalScore = 0;
+            u.highestScore = 0;
+            u.categoryProgress.clear();
+            for (auto& p : questionFiles) u.categoryProgress[p.first] = 0;
+            users[username] = u;
+        } else if (resetProgress) {
+            users[username].totalScore = 0;
+            for (auto& p : questionFiles) users[username].categoryProgress[p.first] = 0;
+        }
+        currentUser = users[username];
+        lastUser = username;
+        users[username] = currentUser;
+        saveAllUsers();
     }
 
 public:
     QuizGame() {
         loadQuestionsFromFiles();
+        loadAllUsers();
     }
 
     void loadQuestionsFromFiles() {
         questions.clear();
-
         for (auto& pair : questionFiles) {
             string category = pair.first;
             string qFile = pair.second;
             string oFile = optionsFiles[category];
             string aFile = answersFiles[category];
-
-            cout << "Loading category: " << category << "\n";
-
             ifstream qStream(qFile);
             ifstream oStream(oFile);
             ifstream aStream(aFile);
-
-            if (!qStream.is_open()) {
-                cout << "Error opening question file: " << qFile << "\n";
+            if (!qStream.is_open() || !oStream.is_open() || !aStream.is_open()) {
+                if (qStream.is_open()) qStream.close();
+                if (oStream.is_open()) oStream.close();
+                if (aStream.is_open()) aStream.close();
                 continue;
             }
-            if (!oStream.is_open()) {
-                cout << "Error opening options file: " << oFile << "\n";
-                continue;
-            }
-            if (!aStream.is_open()) {
-                cout << "Error opening answers file: " << aFile << "\n";
-                continue;
-            }
-
             string qLine, oLine, aLine;
-            int questionCount = 0;
-
             while (getline(qStream, qLine) && getline(oStream, oLine) && getline(aStream, aLine)) {
                 Question q;
                 q.category = category;
                 q.question = trim(qLine);
-
                 stringstream ss(oLine);
                 string opt;
                 while (getline(ss, opt, '|')) {
                     q.options.push_back(trim(opt));
                 }
-
                 string correctAnswerText = trim(aLine);
                 q.correctAnswer = findCorrectAnswerLetter(q.options, correctAnswerText);
-
                 questions.push_back(q);
-                questionCount++;
             }
-
-            cout << "Loaded " << questionCount << " questions for " << category << "\n";
-
             qStream.close();
             oStream.close();
             aStream.close();
-        }
-
-        cout << "Total questions loaded: " << questions.size() << "\n";
-    }
-
-    void setProgressFile(const string& username) {
-        progressFile = username + "_progress.txt";
-    }
-
-    void loadUserProgress() {
-        ifstream file(progressFile);
-        if (file.is_open()) {
-            file >> currentUser.username;
-            file >> currentUser.totalScore;
-            file >> currentUser.highestScore;
-
-            string category;
-            int progress;
-            while (file >> category >> progress) {
-                currentUser.categoryProgress[category] = progress;
-            }
-            file.close();
-        }
-    }
-
-    void saveUserProgress() {
-        ofstream file(progressFile);
-        if (file.is_open()) {
-            file << currentUser.username << "\n";
-            file << currentUser.totalScore << "\n";
-            file << currentUser.highestScore << "\n";
-            for (auto& pair : currentUser.categoryProgress) {
-                file << pair.first << " " << pair.second << "\n";
-            }
-            file.close();
         }
     }
 
@@ -174,7 +199,7 @@ public:
         cout << "\n========== QUIZ GAME MENU ==========\n";
         cout << "1. Start New Game\n";
         cout << "2. Continue Previous Game\n";
-        cout << "3. View Highest Score\n";
+        cout << "3. View Highest Score (Leaderboard)\n";
         cout << "4. View Category Progress\n";
         cout << "5. Exit\n";
         cout << "====================================\n";
@@ -189,7 +214,7 @@ public:
         cout << "4. General Knowledge\n";
         cout << "5. Back to Main Menu\n";
         cout << "=============================\n";
-        cout << "Enter your choice (1-5) or 'q' to exit: ";
+        cout << "Enter your choice (1-5) or 'q' to return: ";
     }
 
     string getCategoryName(int choice) {
@@ -203,176 +228,211 @@ public:
     }
 
     void startNewGame() {
-        cout << "\nEnter your username: ";
-        cin >> currentUser.username;
-        setProgressFile(currentUser.username);
-        currentUser.totalScore = 0;
-        currentUser.highestScore = 0;
-        currentUser.categoryProgress.clear();
-        for(auto& pair : questionFiles) {
-            currentUser.categoryProgress[pair.first] = 0;
+        cout << "\nEnter your username (or 'q' to cancel): ";
+        string uname;
+        cin >> uname;
+        if (uname == "q" || uname == "Q") {
+            cout << "Cancelled. Returning to main menu.\n";
+            return;
         }
+        setCurrentUser(uname, true);
         cout << "\nWelcome, " << currentUser.username << "!\n";
-        cout << "Press 'q' at any time to exit to main menu.\n";
         playGame();
     }
 
     void continueGame() {
-        string username;
-        cout << "\nEnter your username: ";
-        cin >> username;
-        currentUser.username = username;
-        setProgressFile(currentUser.username);
-        loadUserProgress();
-        if(currentUser.username.empty()) {
-            cout << "\nNo saved game found. Starting new game...\n";
-            startNewGame();
-        } else {
+        loadAllUsers();
+        if (!currentUser.username.empty()) {
             cout << "\nWelcome back, " << currentUser.username << "!\n";
             cout << "Your current score: " << currentUser.totalScore << "\n";
-            cout << "Press 'q' at any time to exit to main menu.\n";
             playGame();
+            return;
         }
+        if (users.empty()) {
+            cout << "\nNo saved game found. Starting new game...\n";
+            startNewGame();
+            return;
+        }
+        cout << "\nNo last user found. Enter username to continue (or 'q' to cancel): ";
+        string uname;
+        cin >> uname;
+        if (uname == "q" || uname == "Q") {
+            cout << "Cancelled. Returning to main menu.\n";
+            return;
+        }
+        if (users.find(uname) == users.end()) {
+            cout << "User not found. Starting new user with that name.\n";
+            setCurrentUser(uname, false);
+        } else {
+            currentUser = users[uname];
+            lastUser = uname;
+        }
+        cout << "\nWelcome back, " << currentUser.username << "!\n";
+        cout << "Your current score: " << currentUser.totalScore << "\n";
+        playGame();
     }
 
     void playGame() {
         int choice;
+        string inp;
         do {
             displayCategories();
-            cin >> choice;
-            if (checkForExit()) return;
-            
-            if(choice >= 1 && choice <= 4) {
+            cin >> inp;
+            if (inp == "q" || inp == "Q") break;
+            bool validNum = true;
+            for (char c : inp) if (!isdigit(c)) validNum = false;
+            if (!validNum) {
+                cout << "Invalid choice! Please try again.\n";
+                continue;
+            }
+            choice = stoi(inp);
+            if (choice >= 1 && choice <= 4) {
                 string category = getCategoryName(choice);
                 playCategory(category);
-            } else if(choice != 5) {
+            } else if (choice == 5) {
+                break;
+            } else {
                 cout << "Invalid choice! Please try again.\n";
             }
-        } while(choice != 5);
-        saveUserProgress();
+        } while(true);
+        users[currentUser.username] = currentUser;
+        saveAllUsers();
     }
 
     void playCategory(const string& category) {
-        int currentProgress = currentUser.categoryProgress[category];
+        int currentProgress = 0;
+        if (currentUser.categoryProgress.find(category) != currentUser.categoryProgress.end())
+            currentProgress = currentUser.categoryProgress[category];
         vector<Question> categoryQuestions;
-
-        for(auto& q : questions) {
-            if(q.category == category) {
-                categoryQuestions.push_back(q);
-            }
+        for (auto& q : questions) {
+            if (q.category == category) categoryQuestions.push_back(q);
         }
-
-        if(categoryQuestions.empty()) {
+        if (categoryQuestions.empty()) {
             cout << "\nNo questions available for " << category << " category!\n";
             return;
         }
-
-        if(currentProgress >= categoryQuestions.size()) {
+        if (currentProgress >= (int)categoryQuestions.size()) {
             cout << "\n🎉 Congratulations! You've completed all questions in " << category << "!\n";
             return;
         }
-
         cout << "\nStarting " << category << " quiz...\n";
         cout << "Current progress: " << currentProgress << "/" << categoryQuestions.size() << " questions\n\n";
-
         int questionsToPlay = min(5, (int)categoryQuestions.size() - currentProgress);
-
-        for(int i = 0; i < questionsToPlay; i++) {
+        for (int i = 0; i < questionsToPlay; i++) {
             Question q = categoryQuestions[currentProgress + i];
-            displayQuestion(q, i + 1);
-
-            char answer;
-            cout << "Your answer (A/B/C/D) or 'q' to exit: ";
+            displayQuestion(q, currentProgress + i + 1);
+            string answer;
+            cout << "Your answer (A/B/C/D) or 'q' to stop and return: ";
             cin >> answer;
-            answer = toupper(answer);
-
-            if (answer == 'Q') {
-                cout << "\nSaving progress and exiting...\n";
-                saveUserProgress();
-                return;
+            if (answer == "q" || answer == "Q") {
+                cout << "Exiting to category menu...\n";
+                break;
             }
-
-            if(answer == q.correctAnswer) {
+            if (answer.size() != 1) {
+                cout << "Invalid choice! Please try again.\n";
+                i--;
+                continue;
+            }
+            char ch = toupper(answer[0]);
+            if (ch < 'A' || ch > 'D') {
+                cout << "Invalid choice! Please try again.\n";
+                i--;
+                continue;
+            }
+            if (ch == q.correctAnswer) {
                 cout << "✅ Correct! +10 points\n";
                 currentUser.totalScore += 10;
-                if(currentUser.totalScore > currentUser.highestScore) {
-                    currentUser.highestScore = currentUser.totalScore;
-                }
+                if (currentUser.totalScore > currentUser.highestScore) currentUser.highestScore = currentUser.totalScore;
             } else {
                 cout << "❌ Wrong! The correct answer was " << q.correctAnswer << "\n";
             }
             cout << "Current Score: " << currentUser.totalScore << " | Highest Score: " << currentUser.highestScore << "\n\n";
-
             currentUser.categoryProgress[category] = currentProgress + i + 1;
-            saveUserProgress();
+            users[currentUser.username] = currentUser;
+            saveAllUsers();
         }
-
         cout << "Category progress updated: " << currentUser.categoryProgress[category] << "/" << categoryQuestions.size() << "\n";
     }
 
     void displayQuestion(const Question& q, int number) {
         cout << "Question " << number << ":\n";
         cout << q.question << "\n";
-        for(size_t i = 0; i < q.options.size(); i++) {
+        for (size_t i = 0; i < q.options.size(); i++) {
             cout << char('A' + i) << ". " << q.options[i] << "\n";
         }
     }
 
     void viewHighestScore() {
-        string username;
-        cout << "\nEnter your username: ";
-        cin >> username;
-        currentUser.username = username;
-        setProgressFile(currentUser.username);
-        loadUserProgress();
-        if(currentUser.username.empty()) {
-            cout << "\nNo game data found. Play a game first!\n";
-        } else {
-            cout << "\n========== HIGHEST SCORE ==========\n";
-            cout << "Player: " << currentUser.username << "\n";
-            cout << "Highest Score: " << currentUser.highestScore << "\n";
-            cout << "===================================\n";
-        }
-    }
-
-    void viewCategoryProgress() {
-        string username;
-        cout << "\nEnter your username: ";
-        cin >> username;
-        currentUser.username = username;
-        setProgressFile(currentUser.username);
-        loadUserProgress();
-        if(currentUser.username.empty()) {
+        loadAllUsers();
+        if (users.empty()) {
             cout << "\nNo game data found. Play a game first!\n";
             return;
         }
+        vector<UserProgress> list;
+        for (auto& p : users) list.push_back(p.second);
+        sort(list.begin(), list.end(), [](const UserProgress& a, const UserProgress& b){
+            return a.highestScore > b.highestScore;
+        });
+        cout << "\n========== LEADERBOARD ==========\n";
+        cout << "Rank | Player | Highest Score\n";
+        cout << "-------------------------------\n";
+        for (size_t i = 0; i < list.size(); i++) {
+            cout << i+1 << " | " << list[i].username << " | " << list[i].highestScore << "\n";
+        }
+        cout << "=================================\n";
+    }
 
+    void viewCategoryProgress() {
+        loadAllUsers();
+        if (users.empty()) {
+            cout << "\nNo game data found. Play a game first!\n";
+            return;
+        }
+        cout << "\nEnter username to view progress (or 'q' to cancel): ";
+        string uname;
+        cin >> uname;
+        if (uname == "q" || uname == "Q") {
+            cout << "Cancelled. Returning to main menu.\n";
+            return;
+        }
+        if (users.find(uname) == users.end()) {
+            cout << "User not found.\n";
+            return;
+        }
+        UserProgress u = users[uname];
         cout << "\n====== CATEGORY PROGRESS ======\n";
-        cout << "Player: " << currentUser.username << "\n";
-        cout << "Total Score: " << currentUser.totalScore << "\n";
-        cout << "Highest Score: " << currentUser.highestScore << "\n\n";
-
-        for(auto& pair : questionFiles) {
+        cout << "Player: " << u.username << "\n";
+        cout << "Total Score: " << u.totalScore << "\n";
+        cout << "Highest Score: " << u.highestScore << "\n\n";
+        for (auto& pair : questionFiles) {
             string category = pair.first;
-            int progress = currentUser.categoryProgress[category];
+            int progress = 0;
+            if (u.categoryProgress.find(category) != u.categoryProgress.end()) progress = u.categoryProgress[category];
             int total = 0;
-            for(auto& q : questions) {
-                if(q.category == category) total++;
-            }
+            for (auto& q : questions) if (q.category == category) total++;
             cout << category << ": " << progress << "/" << total << " questions completed\n";
         }
         cout << "===============================\n";
     }
 
     void run() {
+        loadAllUsers();
         cout << "Total questions loaded: " << questions.size() << "\n";
-
-        int choice;
+        string inp;
         do {
             displayMenu();
-            cin >> choice;
-            if (checkForExit()) break;
-            
+            cin >> inp;
+            if (inp == "q" || inp == "Q") {
+                cout << "\nThank you for playing! Goodbye!\n";
+                break;
+            }
+            bool validNum = true;
+            for (char c : inp) if (!isdigit(c)) validNum = false;
+            if (!validNum) {
+                cout << "Invalid choice! Please try again.\n";
+                continue;
+            }
+            int choice = stoi(inp);
             switch(choice) {
                 case 1:
                     startNewGame();
@@ -388,11 +448,12 @@ public:
                     break;
                 case 5:
                     cout << "\nThank you for playing! Goodbye!\n";
-                    break;
+                    saveAllUsers();
+                    return;
                 default:
                     cout << "Invalid choice! Please try again.\n";
             }
-        } while(choice != 5);
+        } while(true);
     }
 };
 
@@ -400,7 +461,6 @@ int main() {
     cout << "====================================\n";
     cout << "     WELCOME TO THE QUIZ GAME\n";
     cout << "====================================\n";
-
     QuizGame game;
     game.run();
     return 0;
