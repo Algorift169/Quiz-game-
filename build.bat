@@ -39,12 +39,27 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
-REM Compile the game
-echo Compiling Quiz Game...
-if "%COMPILER%"=="g++" (
-    g++ -std=c++11 MINI_GAME.cpp -o ..\build\quiz_game.exe
+REM Determine which source file to use
+set SOURCE_FILE=MAIN_GAME.cpp
+if not exist MAIN_GAME.cpp (
+    if exist MINI_GAME.cpp (
+        set SOURCE_FILE=MINI_GAME.cpp
+        echo Found MINI_GAME.cpp
+    ) else (
+        echo Error: No game source file found! (Looking for MAIN_GAME.cpp or MINI_GAME.cpp)
+        pause
+        exit /b 1
+    )
 ) else (
-    cl /EHsc MINI_GAME.cpp /Fe..\build\quiz_game.exe
+    echo Found MAIN_GAME.cpp
+)
+
+REM Compile the game
+echo Compiling Quiz Game using %SOURCE_FILE%...
+if "%COMPILER%"=="g++" (
+    g++ -std=c++11 "%SOURCE_FILE%" -o ..\build\quiz_game.exe
+) else (
+    cl /EHsc "%SOURCE_FILE%" /Fe..\build\quiz_game.exe
 )
 
 REM Check if compilation was successful
@@ -55,7 +70,11 @@ if %errorlevel% equ 0 (
     REM Copy question files to build directory
     echo Copying game data files...
     copy *.txt ..\build\ >nul
-    echo [SUCCESS] Game data files copied successfully!
+    if %errorlevel% equ 0 (
+        echo [SUCCESS] Game data files copied successfully!
+    ) else (
+        echo [WARNING] No text files found to copy or copy failed.
+    )
     
     echo.
     echo ===================================

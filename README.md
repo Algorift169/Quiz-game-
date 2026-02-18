@@ -31,7 +31,7 @@ Quiz-game-/
 └── README.md # This file
 
 
-## 🚀 How to Build and Run
+### 🚀 How to Build and Run
 
 ### Prerequisites
 
@@ -45,16 +45,13 @@ Quiz-game-/
 
 1. Open terminal in the root directory (`Quiz-game-`)
 2. Make the build script executable:
-   ```bash
-   chmod +x build.sh
-   Run the build script:
-bash
+  
+chmod +x build.sh
 
+build
+-------
 ./build.sh
-
-Run the game:
-bash
-
+----------
 cd build && ./quiz_game
 
 For Windows Users
